@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PMCV APS Match Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="topbar__inner">
+          <a class="brand" href="#" aria-label="PMCV APS Match Simulator">
+            <img
+              class="brand__logo"
+              src="https://gnmp.pmcv.com.au/wp-content/uploads/2023/02/pmcv_logo-1.svg"
+              alt="PMCV logo"
+            />
+            <div class="brand__copy">
+              <span class="brand__eyebrow">Graduate Nurse Midwifery Program</span>
+              <span class="brand__title">PMCV APS Match Simulator</span>
+            </div>
+          </a>
+          <nav class="topnav" aria-label="Primary">
+            <a href="#">The Match</a>
+            <a href="#">The Process</a>
+            <a href="#">Health Services</a>
+            <a class="topnav__login" href="#">Candidate Setup</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero__content">
+            <p class="hero__eyebrow">2027 Match Planning</p>
+            <h1>Candidate Preference Interface</h1>
+            <p class="hero__lede">
+              Build and test PMCV-style preference scenarios using campus distribution,
+              priority group mix, location-aware hospital preferences, and a scaled
+              statewide position model.
+            </p>
+          </div>
+        </section>
+
+        <section class="workspace">
+          <div class="workspace__grid">
+            <section class="panel panel--form" aria-labelledby="candidate-form-title">
+              <div class="panel__header">
+                <div>
+                  <p class="panel__kicker">Candidate Entry</p>
+                  <h2 id="candidate-form-title">APS Input Form</h2>
+                </div>
+                <span class="panel__status">Draft interface</span>
+              </div>
+
+              <form id="candidate-form" class="form">
+                <div class="form-section">
+                  <label class="field">
+                    <span class="field__label">Candidate name</span>
+                    <input
+                      id="candidate-name"
+                      name="candidateName"
+                      type="text"
+                      placeholder="Enter a label for this test candidate"
+                    />
+                  </label>
+                </div>
+
+                <div class="form-section">
+                  <div class="field">
+                    <span class="field__label">Priority group</span>
+                    <div class="radio-group" role="radiogroup" aria-label="Priority group">
+                      <label class="radio-card">
+                        <input type="radio" name="priorityGroup" value="Group 1" checked />
+                        <span class="radio-card__title">Group 1</span>
+                        <span class="radio-card__text">Victorian priority cohort</span>
+                      </label>
+                      <label class="radio-card">
+                        <input type="radio" name="priorityGroup" value="Group 2" />
+                        <span class="radio-card__title">Group 2</span>
+                        <span class="radio-card__text">All other eligible candidates</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section">
+                  <div class="section-head">
+                    <div>
+                      <span class="field__label">Preference list</span>
+                      <p class="section-head__text">
+                        Ordered from most preferred to least preferred. You can fill any number
+                        from 1 to 6.
+                      </p>
+                    </div>
+                    <button class="ghost-button" type="button" id="fill-mental-health">
+                      Load Mental Health example
+                    </button>
+                  </div>
+
+                  <div class="preference-list" id="preference-list"></div>
+                </div>
+
+                <div class="form-section">
+                  <div class="field">
+                    <span class="field__label">Health service ranking assumption</span>
+                    <div class="rank-grid" role="radiogroup" aria-label="Health service ranking percentile">
+                      <label class="rank-card">
+                        <input type="radio" name="rankingBand" value="Top 5%" />
+                        <span class="rank-card__title">Top 5%</span>
+                        <span class="rank-card__text">Highly competitive candidate profile</span>
+                      </label>
+                      <label class="rank-card">
+                        <input type="radio" name="rankingBand" value="Top 10%" checked />
+                        <span class="rank-card__title">Top 10%</span>
+                        <span class="rank-card__text">Strongly ranked across many services</span>
+                      </label>
+                      <label class="rank-card">
+                        <input type="radio" name="rankingBand" value="Top 20%" />
+                        <span class="rank-card__title">Top 20%</span>
+                        <span class="rank-card__text">Competitive but not highly selective everywhere</span>
+                      </label>
+                      <label class="rank-card">
+                        <input type="radio" name="rankingBand" value="Top 50%" />
+                        <span class="rank-card__title">Top 50%</span>
+                        <span class="rank-card__text">Broadly rankable with more fallback dependence</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="primary-button" type="submit">Save Candidate Setup</button>
+                  <button class="secondary-button" type="button" id="clear-form">
+                    Clear Form
+                  </button>
+                </div>
+              </form>
+            </section>
+
+            <aside class="panel panel--summary" aria-labelledby="summary-title">
+              <div class="panel__header">
+                <div>
+                  <p class="panel__kicker">Preview</p>
+                  <h2 id="summary-title">Candidate Summary</h2>
+                </div>
+              </div>
+
+              <div class="summary-card">
+                <div class="summary-card__meta">
+                  <div>
+                    <span class="summary-card__label">Candidate</span>
+                    <strong id="summary-name">Test Candidate</strong>
+                  </div>
+                  <div>
+                    <span class="summary-card__label">Priority</span>
+                    <strong id="summary-priority">Group 1</strong>
+                  </div>
+                  <div>
+                    <span class="summary-card__label">Ranking</span>
+                    <strong id="summary-ranking">Top 10%</strong>
+                  </div>
+                </div>
+
+                <div class="summary-card__body">
+                  <h3>Preference Order</h3>
+                  <ol id="summary-preferences" class="summary-list"></ol>
+                </div>
+
+                <div class="summary-card__footer">
+                  <span class="badge badge--soft">Interface only</span>
+                  <span class="badge badge--soft">No capacity loaded yet</span>
+                </div>
+              </div>
+
+              <div class="panel-note panel-note--accent">
+                <h3>Current baseline candidate pool</h3>
+                <ul id="candidate-baseline"></ul>
+              </div>
+
+              <div class="panel-note panel-note--accent">
+                <h3>Current baseline position model</h3>
+                <ul id="position-baseline"></ul>
+              </div>
+
+              <div class="panel-note panel-note--accent">
+                <h3>Campus distribution baseline</h3>
+                <ul id="campus-baseline"></ul>
+              </div>
+
+              <div class="panel-note panel-note--accent">
+                <h3>Preference algorithm baseline</h3>
+                <ul id="algorithm-baseline"></ul>
+              </div>
+
+              <div class="panel-note panel-note--accent">
+                <h3>Known demand benchmarks</h3>
+                <ul id="benchmark-baseline"></ul>
+              </div>
+            </aside>
+
+            <section class="panel panel--simulation" aria-labelledby="simulation-title">
+              <div class="panel__header">
+                <div>
+                  <p class="panel__kicker">Simulation Engine</p>
+                  <h2 id="simulation-title">Run PMCV Allocation Model</h2>
+                </div>
+                <span class="panel__status">Runnable baseline</span>
+              </div>
+
+              <div class="simulation-controls">
+                <label class="field simulation-field">
+                  <span class="field__label">Random seed</span>
+                  <input id="simulation-seed" type="text" value="2027" />
+                </label>
+                <button class="primary-button" type="button" id="run-simulation">
+                  Run Simulation
+                </button>
+              </div>
+
+              <div class="simulation-results" id="simulation-results">
+                <div class="result-grid" id="result-grid"></div>
+
+                <div class="result-card result-card--hero">
+                  <h3>Current Candidate Outcome</h3>
+                  <ul id="current-candidate-outcomes" class="result-list"></ul>
+                  <div id="current-candidate-badge" class="candidate-outcome-badge"></div>
+                </div>
+
+                <div class="result-layout">
+                  <div class="result-card">
+                    <h3>Match Outcomes</h3>
+                    <ul id="match-outcomes" class="result-list"></ul>
+                  </div>
+                  <div class="result-card">
+                    <h3>Preference Outcomes</h3>
+                    <ul id="preference-outcomes" class="result-list"></ul>
+                  </div>
+                  <div class="result-card">
+                    <h3>Regional Mix</h3>
+                    <ul id="regional-outcomes" class="result-list"></ul>
+                  </div>
+                  <div class="result-card">
+                    <h3>Stage Capacity Impact</h3>
+                    <ul id="capacity-outcomes" class="result-list"></ul>
+                  </div>
+                </div>
+
+                <div class="result-card result-card--wide">
+                  <h3>Most Competitive Services In This Run</h3>
+                  <div id="competitive-services" class="result-table"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="preference-row-template">
+      <div class="preference-row" draggable="true">
+        <button class="drag-handle" type="button" aria-label="Drag to reorder preference">
+          <span></span><span></span><span></span>
+        </button>
+        <span class="preference-row__index"></span>
+        <div class="preference-row__body">
+          <span class="field__label preference-row__label"></span>
+          <select class="preference-input" aria-label="PMCV program preference">
+            <option value="">Select a PMCV program</option>
+          </select>
+          <div class="preference-meta"></div>
+        </div>
+      </div>
+    </template>
+
+    <script src="./programs.js"></script>
+    <script src="./positions.js"></script>
+    <script src="./campuses.js"></script>
+    <script src="./simulation-config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

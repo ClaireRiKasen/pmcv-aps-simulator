@@ -1,0 +1,31 @@
+window.PMCV_CAMPUS_BASELINE = {
+  meta: {
+    source: "/Users/clairelee/Downloads/VIC nursing campus.png",
+    description:
+      "Approximate Victoria nursing campus distribution used as the simulator's campus baseline.",
+    statewideApproxStudents: 4590,
+  },
+  campuses: [
+    { provider: "La Trobe University", campus: "Bundoora", students: 350, hub: "North Metro" },
+    { provider: "La Trobe University", campus: "Bendigo", students: 180, hub: "Bendigo" },
+    { provider: "La Trobe University", campus: "Albury-Wodonga", students: 130, hub: "Albury-Wodonga" },
+    { provider: "La Trobe University", campus: "Shepparton", students: 100, hub: "Shepparton" },
+    { provider: "La Trobe University", campus: "Mildura", students: 90, hub: "Mildura" },
+    { provider: "Deakin University", campus: "Burwood", students: 390, hub: "East Metro" },
+    { provider: "Deakin University", campus: "Geelong Waterfront", students: 250, hub: "Geelong" },
+    { provider: "Deakin University", campus: "Warrnambool", students: 160, hub: "Warrnambool" },
+    { provider: "Federation University", campus: "Ballarat / Mt Helen", students: 300, hub: "Ballarat" },
+    { provider: "Federation University", campus: "Churchill / Gippsland", students: 250, hub: "Gippsland" },
+    { provider: "Monash University", campus: "Clayton", students: 320, hub: "South East Metro" },
+    { provider: "Monash University", campus: "Peninsula / Frankston", students: 180, hub: "Frankston / Peninsula" },
+    { provider: "Victoria University", campus: "St Albans", students: 500, hub: "West Metro" },
+    { provider: "Australian Catholic University", campus: "Melbourne / Fitzroy", students: 250, hub: "Inner Metro" },
+    { provider: "Australian Catholic University", campus: "Ballarat", students: 130, hub: "Ballarat" },
+    { provider: "RMIT University", campus: "Bundoora", students: 250, hub: "North Metro" },
+    { provider: "University of Melbourne", campus: "Parkville", students: 220, hub: "Parkville" },
+    { provider: "Swinburne University", campus: "Hawthorn", students: 90, hub: "East Metro" },
+    { provider: "Swinburne University", campus: "Wantirna", students: 60, hub: "Outer East Metro" },
+    { provider: "Holmesglen Institute", campus: "Moorabbin", students: 150, hub: "Bayside / South Metro" },
+    { provider: "Torrens University Australia", campus: "Melbourne CBD / Flinders Street", students: 100, hub: "Inner Metro" },
+  ],
+};
